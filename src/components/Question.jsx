@@ -1,12 +1,14 @@
 import React from "react";
 import Answer from "./Answer";
 
-export default function Question() {
+export default function Question(props) {
   const answerList = [];
-  for (let i = 0; i < 4; i++) {
-    answerList.push(<Answer value={props.data.incorrect_answers[i]} />);
+  for (let i = 0; i < 3; i++) {
+    answerList.push(
+      <Answer value={props.data.incorrect_answers[i]} correct={false} />
+    );
   }
-  answerList.push(props.data.correct_answer);
+  answerList.push(<Answer value={props.data.correct_answer} correct={true} />);
 
   return (
     <div className="question">
