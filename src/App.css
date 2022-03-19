@@ -67,21 +67,29 @@ section {
 }
 
 .quizz-game {
-  width: 35%;
+  width: 40%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.quizz-game__button {
+  font-size: 1.3rem;
 }
 
 .question {
   margin: 1em;
+  width: 100%;
 }
 .question__text {
   text-align: left;
   font-weight: 700;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .question__answer-wrapper {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
   padding: 2em 0;
@@ -98,4 +106,8 @@ section {
   padding: 0.5em 1.8em;
   font-size: 1rem;
   background-color: rgb(151, 199, 79);
+}
+
+.question__answer--selected {
+  background-color: #d6dbf5;
 }
