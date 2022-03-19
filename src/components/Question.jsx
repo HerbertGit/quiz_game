@@ -2,6 +2,7 @@ import React from "react";
 import Answer from "./Answer";
 import { useEffect } from "react";
 import { nanoid } from "nanoid";
+import he from "he";
 
 export default function Question(props) {
   /*
@@ -33,9 +34,12 @@ export default function Question(props) {
     answerList[j] = temp;
   }
 
+  let decodedQuestion = he.decode(props.data.question);
+  console.log(decodedQuestion);
+
   return (
     <div className="question">
-      <p className="question__text">{props.data.question}</p>
+      <p className="question__text">{decodedQuestion}</p>
       <div className="question__answer-wrapper">{answerList}</div>
     </div>
   );
