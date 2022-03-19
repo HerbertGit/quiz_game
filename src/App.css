@@ -1,38 +1,94 @@
-.App {
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Karla", sans-serif;
+  background-color: #f5f7fb;
+  color: #293264;
+}
+
+h1,
+p {
+  margin: 0;
+  padding: 0;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0.3em;
+  letter-spacing: 0.1em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  /* letter-spacing: 0.1em; */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.button {
+  padding: 0.5em 1.8em;
+  font-size: 0.6rem;
+  border-radius: 10px;
+  border: 1px solid #4d5b9e;
+  display: block;
+  cursor: pointer;
+  /* background-color: #d6dbf5; */
+}
+
+section {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
+  flex-direction: column;
 }
 
-.App-link {
-  color: #61dafb;
+.app {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100vh;
+  width: 100%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.welcome-screen__text {
+  margin-bottom: 2em;
+}
+
+.welcome-screen__button {
+  font-size: 1.5rem;
+  /* padding: 0.5em 2.5em; */
+  color: #f5f7fb;
+  background-color: #4d5b9e;
+  font-weight: 500;
+}
+
+.quizz-game {
+  width: 35%;
+}
+
+.question {
+  margin: 1em;
+}
+.question__text {
+  text-align: left;
+  font-weight: 700;
+  font-size: 1.3rem;
+}
+
+.question__answer-wrapper {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row;
+  padding: 2em 0;
+}
+
+.question__answer {
+  border-radius: 8px;
+  padding: 0.5em 1.8em;
+  font-size: 1rem;
 }
