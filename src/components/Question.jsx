@@ -45,6 +45,8 @@ export default function Question(props) {
       });
     });
   }
+
+  //Only on First Run
   useEffect(() => {
     let answerObjects = [];
 
@@ -64,11 +66,13 @@ export default function Question(props) {
       };
     });
 
-    for (let i = answerObjects.length - 1; i > 0; i--) {
-      let j = Math.floor(Math.random() * (i + 1));
-      let temp = answerObjects[i];
-      answerObjects[i] = answerObjects[j];
-      answerObjects[j] = temp;
+    if (!answerList) {
+      for (let i = answerObjects.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = answerObjects[i];
+        answerObjects[i] = answerObjects[j];
+        answerObjects[j] = temp;
+      }
     }
 
     setAnswerList(answerObjects);
