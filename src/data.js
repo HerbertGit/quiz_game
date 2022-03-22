@@ -7,41 +7,41 @@ export default [
     correct_answer: "France",
     incorrect_answers: ["Slovenia", "Switzerland", "Slovakia"],
   },
-  {
-    category: "History",
-    type: "multiple",
-    difficulty: "medium",
-    question:
-      "When was &quot;The Gadget&quot;, the first nuclear device to be detonated, tested?",
-    correct_answer: "July 16, 1945",
-    incorrect_answers: ["June 22, 1945", "August 6, 1945", "April 5, 1945"],
-  },
-  {
-    category: "Sports",
-    type: "multiple",
-    difficulty: "easy",
-    question: "Which country has hosted the 2018 FIFA World Cup?",
-    correct_answer: "Russia",
-    incorrect_answers: ["Germany", "United States", "Saudi Arabia"],
-  },
-  {
-    category: "Entertainment: Music",
-    type: "multiple",
-    difficulty: "medium",
-    question:
-      "Which of these songs by artist Eminem contain the lyric &quot;Nice to meet you. Hi, my name is... I forgot my name!&quot;?",
-    correct_answer: "Rain Man",
-    incorrect_answers: ["Without Me", "Kim", "Square Dance"],
-  },
-  {
-    category: "Celebrities",
-    type: "multiple",
-    difficulty: "medium",
-    question:
-      "Which famous New York Yankees outfielder did Marilyn Monroe marry?",
-    correct_answer: "Joe DiMaggio",
-    incorrect_answers: ["Tino Martinez", "Babe Ruth", "Mason Williams"],
-  },
+  // {
+  //   category: "History",
+  //   type: "multiple",
+  //   difficulty: "medium",
+  //   question:
+  //     "When was &quot;The Gadget&quot;, the first nuclear device to be detonated, tested?",
+  //   correct_answer: "July 16, 1945",
+  //   incorrect_answers: ["June 22, 1945", "August 6, 1945", "April 5, 1945"],
+  // },
+  // {
+  //   category: "Sports",
+  //   type: "multiple",
+  //   difficulty: "easy",
+  //   question: "Which country has hosted the 2018 FIFA World Cup?",
+  //   correct_answer: "Russia",
+  //   incorrect_answers: ["Germany", "United States", "Saudi Arabia"],
+  // },
+  // {
+  //   category: "Entertainment: Music",
+  //   type: "multiple",
+  //   difficulty: "medium",
+  //   question:
+  //     "Which of these songs by artist Eminem contain the lyric &quot;Nice to meet you. Hi, my name is... I forgot my name!&quot;?",
+  //   correct_answer: "Rain Man",
+  //   incorrect_answers: ["Without Me", "Kim", "Square Dance"],
+  // },
+  // {
+  //   category: "Celebrities",
+  //   type: "multiple",
+  //   difficulty: "medium",
+  //   question:
+  //     "Which famous New York Yankees outfielder did Marilyn Monroe marry?",
+  //   correct_answer: "Joe DiMaggio",
+  //   incorrect_answers: ["Tino Martinez", "Babe Ruth", "Mason Williams"],
+  // },
   // {
   //   category: "History",
   //   type: "multiple",

@@ -9,6 +9,7 @@ export default function QuizzGame() {
   const [endGame, setEndGame] = useState(false);
 
   function turnEndGame() {
+    console.log("toggling end game");
     setEndGame((prevEndGame) => !prevEndGame);
   }
 

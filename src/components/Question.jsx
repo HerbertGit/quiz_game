@@ -13,25 +13,57 @@ export default function Question(props) {
   */
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [answerList, setAnswerList] = useState([]);
-  const [answerComponentList, setAnswerComponentList] = useState([]);
 
-  function renderAnswers() {
-    console.log("Answer list: " + answerList);
-    let ComponentList = answerList.map((answer) => {
-      return (
-        <Answer
-          value={answer.value}
-          correct={answer.correct}
-          key={answer.id}
-          id={answer.id}
-          selected={answer.selected}
-          handleClick={() => handleSelect(answer.id)}
-        />
-      );
+  useEffect(() => {
+    const answerOptions = [
+      ...props.data.incorrect_answers,
+      props.data.correct_answer,
+    ];
+
+    let answerObjects = answerOptions.map((answer) => {
+      let answerID = nanoid();
+      let cor = undefined;
+      if (props.endGame) {
+        if (answer === props.data.correct_answer) {
+          cor = true;
+        } else if (answer !== props.data.correct_answer) {
+          cor = false;
+        }
+      }
+
+      return {
+        value: answer,
+        correct: cor,
+        id: answerID,
+        selected: false,
+      };
     });
 
-    setAnswerComponentList(ComponentList);
-  }
+    if (!answerList) {
+      for (let i = answerObjects.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = answerObjects[i];
+        answerObjects[i] = answerObjects[j];
+        answerObjects[j] = temp;
+      }
+    }
+    setAnswerList(answerObjects);
+  }, []);
+
+  let ComponentList = answerList.map((answer) => {
+    return (
+      <Answer
+        value={answer.value}
+        correct={answer.correct}
+        key={answer.id}
+        id={answer.id}
+        selected={answer.selected}
+        handleClick={() => handleSelect(answer.id)}
+      />
+    );
+  });
+
+  let decodedQuestion = he.decode(props.data.question);
 
   function handleSelect(answerID) {
     // console.log(answerID);
@@ -47,60 +79,60 @@ export default function Question(props) {
   }
 
   //Only on First Run
-  useEffect(() => {
-    let answerObjects = [];
+  // useEffect(() => {
 
-    const answerOptions = [
-      ...props.data.incorrect_answers,
-      props.data.correct_answer,
-    ];
+  // renderAnswers();
+  // }, []);
 
-    answerObjects = answerOptions.map((answer) => {
-      let answerID = nanoid();
+  // rerenders answers when data
+  // useEffect(() => {
+  //   console.log("rerender");
+  //   renderAnswers();
+  // }, [answerList]);
 
-      return {
-        value: answer,
-        correct: false,
-        id: answerID,
-        selected: false,
-      };
-    });
+  // function checkAnswers() {
+  //   console.log("checking answers");
+  //   /*
+  //     map through answerList
+  //     if answerList.value === props.data.correct_answer && answerList.selected
+  //       change that answer "correct" value to true
+  //     else if answerList.selected && answer
 
-    if (!answerList) {
-      for (let i = answerObjects.length - 1; i > 0; i--) {
-        let j = Math.floor(Math.random() * (i + 1));
-        let temp = answerObjects[i];
-        answerObjects[i] = answerObjects[j];
-        answerObjects[j] = temp;
-      }
-    }
+  //     selected | answer is true | color    |  style
+  //         1             1         green       --correct
+  //         1             0         red         --wrong
+  //         0             1         green       --correct
+  //         0             0         default
 
-    setAnswerList(answerObjects);
-    renderAnswers();
-  }, []);
+  //   */
 
-  useEffect(() => {
-    renderAnswers();
-  }, [answerList]);
+  //   //Changes
+  //   setAnswerList((prevAnswerList) => {
+  //     // console.log(prevAnswerList);
+  //     return prevAnswerList.map((prevAnswer) => {
+  //       return {
+  //         ...prevAnswer,
+  //         correct:
+  //           prevAnswer.value === props.data.correct_answer ? true : false,
+  //       };
+  //     });
+  //   });
+  //   console.log("changed answer list: " + answerList);
+  // }
+  //
+  // if (props.endGame) {
+  //   checkAnswers();
+  // }
 
-  let decodedQuestion = he.decode(props.data.question);
-  function checkAnswers() {
-    /*
-      map through answerList
-      if answerList.value === props.data.correct_answer
-        change that answer "correct" tag to true
-        
-    */
-  }
-
-  if (props.endGame) {
-    checkAnswers();
-  }
+  // useEffect(() => {
+  //   console.log("checking if game has ended");
+  //   if (props.endGame) checkAnswers();
+  // }, [props.endGame]);
 
   return (
     <div className="question">
       <p className="question__text">{decodedQuestion}</p>
-      <div className="question__answer-wrapper">{answerComponentList}</div>
+      <div className="question__answer-wrapper">{ComponentList}</div>
     </div>
   );
 }
