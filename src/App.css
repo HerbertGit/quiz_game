@@ -101,20 +101,20 @@ section {
   font-size: 1rem;
 }
 
-.question__answer--correct {
+.question__answer.correct {
   border-radius: 8px;
   padding: 0.5em 1.8em;
   font-size: 1rem;
   background-color: rgb(151, 199, 79);
 }
 
-.question__answer--wrong {
+.question__answer.wrong {
   border-radius: 8px;
   padding: 0.5em 1.8em;
   font-size: 1rem;
   background-color: rgb(199, 79, 79);
 }
 
-.question__answer--selected {
+.question__answer.selected {
   background-color: #d6dbf5;
 }
