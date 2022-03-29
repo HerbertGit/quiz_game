@@ -7,12 +7,18 @@ import { nanoid } from "nanoid";
 export default function QuizzGame() {
   const [questions, setQuestions] = useState([]);
   const [endGame, setEndGame] = useState(false);
+  const [checkAnswers, setChceckAnswers] = useState(false);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     setQuestions(data);
   }, []);
 
   console.log(questions);
+
+  function handleScore() {
+    setScore((prevScore) => prevScore + 1);
+  }
 
   let questionElements = [];
   questionElements =
@@ -28,8 +34,10 @@ export default function QuizzGame() {
               text={question.question}
               correct={question.correct_answer}
               end={endGame}
+              check={checkAnswers}
               answers={answers}
               key={question.question}
+              handleScore={handleScore}
             />
           );
         })
@@ -37,8 +45,14 @@ export default function QuizzGame() {
 
   function turnEndGame() {
     console.log("toggling end game");
+    setChceckAnswers((prevCheck) => !prevCheck);
     setEndGame((prevEndGame) => !prevEndGame);
+    console.log(score);
+    setChceckAnswers((prevCheck) => !prevCheck);
   }
+
+  console.log(score);
+
   return (
     <div className="quizz-game">
       {questionElements}

@@ -25,7 +25,7 @@ export default function Question(props) {
   */
 
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  // const [correctAnswer, setCorrectAnswer] = useState(props.correct);
+  const [answers, setAnswers] = useState([]);
 
   let answersList;
   let decodedQuestion = "";
@@ -44,7 +44,6 @@ export default function Question(props) {
  */
 
   //   }
-  const [answers, setAnswers] = useState([]);
   useEffect(() => {
     let shuffledAnswers = shuffle(props.answers);
     setAnswers(shuffledAnswers);
@@ -68,6 +67,11 @@ export default function Question(props) {
       </div>
     );
   });
+
+  if (props.check && selectedAnswer === props.correct) {
+    console.log(`Question ${props.text} is correct`);
+    // props.handleScore();
+  }
 
   console.log(selectedAnswer);
 
