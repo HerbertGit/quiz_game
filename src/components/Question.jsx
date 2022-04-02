@@ -1,9 +1,6 @@
 import React from "react";
-import Answer from "./Answer";
 import { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
 import he from "he";
-import { render } from "@testing-library/react";
 
 function shuffle(array) {
   if (!array) return;
@@ -26,6 +23,7 @@ export default function Question(props) {
 
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [answers, setAnswers] = useState([]);
+  const [checked, setChecked] = useState(false);
 
   let answersList;
   let decodedQuestion = "";
@@ -63,17 +61,20 @@ export default function Question(props) {
         }`}
         onClick={() => handleSelect(answer)}
       >
-        {answer}
+        {he.decode(answer)}
       </div>
     );
   });
 
-  if (props.check && selectedAnswer === props.correct) {
-    console.log(`Question ${props.text} is correct`);
-    // props.handleScore();
-  }
+  useEffect(() => {
+    if (props.check && !checked && selectedAnswer === props.correct) {
+      console.log(`Question ${props.text} is correct`);
+      props.handleScore();
+      setChecked(true);
+    }
+  }, [props.check]);
 
-  console.log(selectedAnswer);
+  // console.log(selectedAnswer);
 
   return (
     <div className="question">

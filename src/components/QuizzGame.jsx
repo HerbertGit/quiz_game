@@ -2,7 +2,6 @@ import React from "react";
 import { useEffect, useState } from "react";
 import Question from "./Question";
 import data from "../data";
-import { nanoid } from "nanoid";
 
 export default function QuizzGame() {
   const [questions, setQuestions] = useState([]);
@@ -14,7 +13,7 @@ export default function QuizzGame() {
     setQuestions(data);
   }, []);
 
-  console.log(questions);
+  // console.log(questions);
 
   function handleScore() {
     setScore((prevScore) => prevScore + 1);
@@ -28,7 +27,7 @@ export default function QuizzGame() {
             ...question.incorrect_answers,
             question.correct_answer,
           ];
-          console.log(answers);
+          // console.log(answers);
           return (
             <Question
               text={question.question}
@@ -48,10 +47,14 @@ export default function QuizzGame() {
     setChceckAnswers((prevCheck) => !prevCheck);
     setEndGame((prevEndGame) => !prevEndGame);
     console.log(score);
-    setChceckAnswers((prevCheck) => !prevCheck);
+    // setChceckAnswers((prevCheck) => !prevCheck);
   }
 
-  console.log(score);
+  useEffect(() => {
+    console.log(score);
+  }, [score]);
+
+  // console.log(score);
 
   return (
     <div className="quizz-game">
