@@ -56,9 +56,34 @@ export default function QuizzGame() {
 
   // console.log(score);
 
+  /*
+  <30% => red  <2 { 0 , 1 , 2}
+  <70% => yellow < 4 { 3 , 4}
+  <100% => green < 5 { 5}
+
+
+ */
+
+  function scoreColor(score, maxScore) {
+    const colorStep = 255 / maxScore;
+    let red = 255;
+    let green = 0;
+
+    red = red - colorStep * score;
+    green = green + colorStep * score;
+
+    console.log(`score color: rgb(${red},${green},0) `);
+    return `rgb(${red},${green}, 100)`;
+  }
+
   return (
     <div className="quizz-game">
       {questionElements}
+      {endGame && (
+        <h3
+          style={{ color: scoreColor(score, 5) }}
+        >{`The Score is: ${score}/5`}</h3>
+      )}
       <button className="button quizz-game__button" onClick={turnEndGame}>
         Check Answers
       </button>
