@@ -94,51 +94,6 @@ export default [
   //   ],
   // },
 
-  // {
-  //   category: "Mythology",
-  //   type: "multiple",
-  //   difficulty: "easy",
-  //   question:
-  //     "The ancient Roman god of war was commonly known as which of the following?",
-  //   correct_answer: "Mars",
-  //   incorrect_answers: ["Jupiter", "Juno", "Ares"],
-  // },
-  // {
-  //   category: "Mythology",
-  //   type: "multiple",
-  //   difficulty: "medium",
-  //   question:
-  //     "This Greek mythological figure is the god/goddess of battle strategy (among other things).",
-  //   correct_answer: "Athena",
-  //   incorrect_answers: ["Ares", "Artemis", "Apollo"],
-  // },
-  // {
-  //   category: "Mythology",
-  //   type: "multiple",
-  //   difficulty: "medium",
-  //   question:
-  //     "The Hippogriff, not to be confused with the Griffon, is a magical creature with the front half of an eagle, and the back half of what?",
-  //   correct_answer: "A Horse",
-  //   incorrect_answers: ["A Dragon", "A Tiger", "A Lion"],
-  // },
-  // {
-  //   category: "Mythology",
-  //   type: "multiple",
-  //   difficulty: "medium",
-  //   question:
-  //     "Which of the following Mesopotamian mythological figures was NOT a deity?",
-  //   correct_answer: "Enkidu",
-  //   incorrect_answers: ["Enki", "Enlil", "Enkimdu"],
-  // },
-  // {
-  //   category: "Mythology",
-  //   type: "multiple",
-  //   difficulty: "hard",
-  //   question:
-  //     "In Norse mythology, what is the name of the serpent which eats the roots of the ash tree Yggdrasil?",
-  //   correct_answer: "Nidhogg",
-  //   incorrect_answers: ["Bragi", "Odin", "Ymir"],
-  // },
   {
     category: "Mythology",
     type: "multiple",

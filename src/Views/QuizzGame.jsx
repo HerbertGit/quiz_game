@@ -1,19 +1,24 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import Question from "./Question";
+import Question from "../components/Question";
 import data from "../data";
+import { scoreColor } from "../utils/utils_functions";
 
-export default function QuizzGame() {
+export default function QuizzGame({ incrementScore, backToMainMenu }) {
   const [questions, setQuestions] = useState([]);
   const [endGame, setEndGame] = useState(false);
   const [checkAnswers, setChceckAnswers] = useState(false);
-  const [score, setScore] = useState(0);
+  const [points, setScore] = useState(0);
 
   useEffect(() => {
     setQuestions(data);
   }, []);
 
-  // console.log(questions);
+  useEffect(() => {
+    console.log(points);
+    //Adding points to global score
+    incrementScore(points);
+  }, [points]);
 
   function handleScore() {
     setScore((prevScore) => prevScore + 1);
@@ -27,7 +32,6 @@ export default function QuizzGame() {
             ...question.incorrect_answers,
             question.correct_answer,
           ];
-          // console.log(answers);
           return (
             <Question
               text={question.question}
@@ -46,34 +50,8 @@ export default function QuizzGame() {
     console.log("toggling end game");
     setChceckAnswers((prevCheck) => !prevCheck);
     setEndGame((prevEndGame) => !prevEndGame);
-    console.log(score);
+    console.log(points);
     // setChceckAnswers((prevCheck) => !prevCheck);
-  }
-
-  useEffect(() => {
-    console.log(score);
-  }, [score]);
-
-  // console.log(score);
-
-  /*
-  <30% => red  <2 { 0 , 1 , 2}
-  <70% => yellow < 4 { 3 , 4}
-  <100% => green < 5 { 5}
-
-
- */
-
-  function scoreColor(score, maxScore) {
-    const colorStep = 255 / maxScore;
-    let red = 255;
-    let green = 0;
-
-    red = red - colorStep * score;
-    green = green + colorStep * score;
-
-    console.log(`score color: rgb(${red},${green},0) `);
-    return `rgb(${red},${green}, 100)`;
   }
 
   return (
@@ -81,12 +59,19 @@ export default function QuizzGame() {
       {questionElements}
       {endGame && (
         <h3
-          style={{ color: scoreColor(score, 5) }}
-        >{`The Score is: ${score}/5`}</h3>
+          style={{ color: scoreColor(points, 5) }}
+        >{`The Score is: ${points}/5`}</h3>
       )}
-      <button className="button quizz-game__button" onClick={turnEndGame}>
-        Check Answers
-      </button>
+
+      {endGame == true ? (
+        <button className="button quizz-game__button" onClick={backToMainMenu}>
+          Back To Main Menu
+        </button>
+      ) : (
+        <button className="button quizz-game__button" onClick={turnEndGame}>
+          Check Answers
+        </button>
+      )}
     </div>
   );
 }

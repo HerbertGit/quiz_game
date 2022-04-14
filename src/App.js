@@ -1,36 +1,28 @@
 import "./App.css";
 import { useState } from "react";
-import QuizzGame from "./components/QuizzGame";
+import QuizzGame from "./Views/QuizzGame";
+import HomeScreen from "./Views/HomeScreen";
 
 function App() {
-  const [game, setGame] = useState({ win: false, start: false });
+  const [gameIsRunning, setGameIsRunning] = useState(false);
+  const [gameScore, setGameScore] = useState(0);
+
+  function addScore(points) {
+    console.log(`Added ${points} points`);
+    setGameScore((prevGameScore) => prevGameScore + points);
+  }
 
   function toggleGame() {
-    // console.log("state changed " + game.start);
-    setGame((prevGame) => {
-      return {
-        ...prevGame,
-        start: !prevGame.start,
-      };
-    });
+    setGameIsRunning((prevGame) => !prevGame);
   }
 
   //Renders QuizzGame component if user starts
   return (
     <div className="app">
-      {game.start ? (
-        <QuizzGame />
+      {gameIsRunning ? (
+        <QuizzGame incrementScore={addScore} backToMainMenu={toggleGame} />
       ) : (
-        <section className="welcome-screen">
-          <h1>Quizz App</h1>
-          <p className="welcome-screen__text">Some description if needed</p>
-          <button
-            className="button welcome-screen__button"
-            onClick={toggleGame}
-          >
-            Start Game
-          </button>
-        </section>
+        <HomeScreen score={gameScore} toggleGame={toggleGame} />
       )}
     </div>
   );
