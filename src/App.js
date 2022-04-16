@@ -1,15 +1,16 @@
 import "./App.css";
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import QuizzGame from "./Views/QuizzGame";
 import HomeScreen from "./Views/HomeScreen";
 import { PreferencesContext } from "./utils/Context";
-import { CATEGORY } from "./utils/constants";
 
 function App() {
   const [gameIsRunning, setGameIsRunning] = useState(false);
   const [gameScore, setGameScore] = useState(0);
   const [questions, setQuestions] = useState([]);
+  const [pending, setPending] = useState(false);
   const { preferences } = useContext(PreferencesContext);
+
   /*
   - Fetch data from API ( 5 questions)
     -Collect user preferences about question ( dificulty and category)
@@ -28,49 +29,57 @@ function App() {
   */
 
   function apiCall(cat, diff) {
-    const url = `https://opentdb.com/api.php?amount=5${
+    const url = `https://opentdb.com/api.php?amount=5&type=multiple${
       cat === 0 ? "" : `&category=${cat}`
-    }${diff === "Any Difficulty" ? "" : `$category=${diff.toLowerCase()}`}`;
+    }${diff === "Any Difficulty" ? "" : `&difficulty=${diff.toLowerCase()}`}`;
     console.log(url);
+
+    setPending(true);
+    console.log("Starting fetching...");
 
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
+        setPending(false);
+        console.log("Fetch complete...");
+        console.log(data);
         setQuestions(data.results);
-        console.log(data.results);
+        return 1;
+      })
+      .catch((err) => {
+        console.error(err);
+        return 0;
       });
 
-    console.log(`questions@App: ${questions}`);
+    // console.log(`questions@App: ${questions}`);
   }
-
-  useEffect(() => {
-    apiCall(preferences.category, preferences.difficulty);
-  }, []);
-
-  useEffect(() => {
-    apiCall(preferences.category, preferences.difficulty);
-  }, [preferences]);
 
   function addScore(points) {
     console.log(`Added ${points} points`);
     setGameScore((prevGameScore) => prevGameScore + points);
   }
 
-  function toggleGame() {
-    setGameIsRunning((prevGame) => !prevGame);
+  //toState tells if game should be disabled (false) or enabled (true)
+  function toggleGame(toState) {
+    apiCall(preferences.category, preferences.difficulty);
+    setGameIsRunning(toState);
   }
 
   //Renders QuizzGame component if user starts
   return (
     <div className="app">
-      {gameIsRunning ? (
+      {gameIsRunning && !pending ? (
         <QuizzGame
           incrementScore={addScore}
-          backToMainMenu={toggleGame}
+          backToMainMenu={() => toggleGame(false)}
           newQuestions={questions}
         />
       ) : (
-        <HomeScreen score={gameScore} toggleGame={toggleGame} />
+        <HomeScreen
+          score={gameScore}
+          pending={pending}
+          toggleGame={() => toggleGame(true)}
+        />
       )}
     </div>
   );

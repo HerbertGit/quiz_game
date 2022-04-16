@@ -10,10 +10,15 @@ import { DIFFICULTY, CATEGORY } from "../utils/constants";
         userPreferences stateObject in App component
 */
 
-export default function HomeScreen({ score, toggleGame, updatePreferences }) {
+export default function HomeScreen({
+  score,
+  toggleGame,
+  updatePreferences,
+  pending,
+}) {
   const { preferences } = useContext(PreferencesContext);
 
-  console.log(`preferences@HomeScren : ${preferences[DIFFICULTY]}`);
+  // console.log(`preferences@HomeScren : ${preferences[DIFFICULTY]}`);
 
   return (
     <section className="welcome-screen">
@@ -30,9 +35,15 @@ export default function HomeScreen({ score, toggleGame, updatePreferences }) {
         updatePreferences={updatePreferences}
       />
 
-      <button className="button welcome-screen__button" onClick={toggleGame}>
-        Start Game
-      </button>
+      {pending ? (
+        <button className="button welcome-screen__button" disabled>
+          Loading...
+        </button>
+      ) : (
+        <button className="button welcome-screen__button" onClick={toggleGame}>
+          Start Game
+        </button>
+      )}
     </section>
   );
 }

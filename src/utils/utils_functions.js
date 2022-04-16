@@ -6,7 +6,7 @@ function scoreColor(score, maxScore) {
   red = red - colorStep * score;
   green = green + colorStep * score;
 
-  console.log(`score color: rgb(${red},${green},0) `);
+  // console.log(`score color: rgb(${red},${green},0) `);
   return `rgb(${red},${green}, 100)`;
 }
 

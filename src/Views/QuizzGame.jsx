@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import Question from "../components/Question";
-import data from "../data";
 import { scoreColor } from "../utils/utils_functions";
 
 export default function QuizzGame({
@@ -9,21 +8,18 @@ export default function QuizzGame({
   backToMainMenu,
   newQuestions,
 }) {
-  const [questions, setQuestions] = useState(newQuestions);
+  // const [questions, setQuestions] = useState(newQuestions);
   const [endGame, setEndGame] = useState(false);
   const [checkAnswers, setChceckAnswers] = useState(false);
   const [points, setScore] = useState(0);
 
-  // useEffect(() => {
-  //   setQuestions(data);
-  // }, []);
   console.log(`QUIZZ QUESTIONS: ${newQuestions}`);
 
   useEffect(() => {
-    console.log(points);
+    // console.log(points);
     //Adding points to global score
     incrementScore(points);
-  }, [points]);
+  }, [points, incrementScore]);
 
   function handleScore() {
     setScore((prevScore) => prevScore + 1);
@@ -31,8 +27,8 @@ export default function QuizzGame({
 
   let questionElements = [];
   questionElements =
-    questions !== []
-      ? questions.map((question, i) => {
+    newQuestions !== []
+      ? newQuestions.map((question, i) => {
           let answers = [
             ...question.incorrect_answers,
             question.correct_answer,
@@ -68,7 +64,7 @@ export default function QuizzGame({
         >{`The Score is: ${points}/5`}</h3>
       )}
 
-      {endGame == true ? (
+      {endGame === true ? (
         <button className="button quizz-game__button" onClick={backToMainMenu}>
           Back To Main Menu
         </button>
