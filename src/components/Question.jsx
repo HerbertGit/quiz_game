@@ -14,7 +14,14 @@ function shuffle(array) {
   return array;
 }
 
-export default function Question(props) {
+export default function Question({
+  text,
+  correct,
+  end,
+  check,
+  answers,
+  handleScore,
+}) {
   /*
     Push all wrong answers as <Answer/> componets in to array
     Adding corect answer also as <Answer/> componets 
@@ -22,8 +29,9 @@ export default function Question(props) {
   */
 
   const [selectedAnswer, setSelectedAnswer] = useState("");
-  const [answers, setAnswers] = useState([]);
+  const [questionAnswers, setAnswers] = useState([]);
   const [checked, setChecked] = useState(false);
+  const [reShuffle, toggleReShuffle] = useState(true);
 
   let answersList;
   let decodedQuestion = "";
@@ -43,21 +51,23 @@ export default function Question(props) {
 
   //   }
   useEffect(() => {
-    let shuffledAnswers = shuffle(props.answers);
-    setAnswers(shuffledAnswers);
-  }, []);
+    if (reShuffle) {
+      let shuffledAnswers = shuffle(answers);
 
-  decodedQuestion = he.decode(props.text);
-  answersList = answers.map((answer) => {
+      setAnswers(shuffledAnswers);
+      toggleReShuffle(false);
+    }
+  }, [answers, reShuffle]);
+
+  decodedQuestion = he.decode(text);
+  answersList = questionAnswers.map((answer) => {
     return (
       <div
         key={answer}
         className={`button question__answer ${
-          answer === props.correct && props.end ? "correct" : ""
-        } ${selectedAnswer === answer && !props.end ? "selected" : ""}  ${
-          props.end && answer !== props.correct && selectedAnswer === answer
-            ? "wrong"
-            : ""
+          answer === correct && end ? "correct" : ""
+        } ${selectedAnswer === answer && !end ? "selected" : ""}  ${
+          end && answer !== correct && selectedAnswer === answer ? "wrong" : ""
         }`}
         onClick={() => handleSelect(answer)}
       >
@@ -66,13 +76,11 @@ export default function Question(props) {
     );
   });
 
-  useEffect(() => {
-    if (props.check && !checked && selectedAnswer === props.correct) {
-      console.log(`Question ${props.text} is correct`);
-      props.handleScore();
-      setChecked(true);
-    }
-  }, [props.check]);
+  if (check && !checked && selectedAnswer === correct) {
+    console.log(`Question ${text} is correct`);
+    handleScore();
+    setChecked(true);
+  }
 
   // console.log(selectedAnswer);
 
