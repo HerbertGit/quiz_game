@@ -4,15 +4,20 @@ import Question from "../components/Question";
 import data from "../data";
 import { scoreColor } from "../utils/utils_functions";
 
-export default function QuizzGame({ incrementScore, backToMainMenu }) {
-  const [questions, setQuestions] = useState([]);
+export default function QuizzGame({
+  incrementScore,
+  backToMainMenu,
+  newQuestions,
+}) {
+  const [questions, setQuestions] = useState(newQuestions);
   const [endGame, setEndGame] = useState(false);
   const [checkAnswers, setChceckAnswers] = useState(false);
   const [points, setScore] = useState(0);
 
-  useEffect(() => {
-    setQuestions(data);
-  }, []);
+  // useEffect(() => {
+  //   setQuestions(data);
+  // }, []);
+  console.log(`QUIZZ QUESTIONS: ${newQuestions}`);
 
   useEffect(() => {
     console.log(points);
