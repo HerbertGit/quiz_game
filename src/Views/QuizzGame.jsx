@@ -1,7 +1,8 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import React, { useContext } from "react";
+import { useState } from "react";
 import Question from "../components/Question";
 import { scoreColor } from "../utils/utils_functions";
+import { PreferencesContext } from "../utils/Context";
 
 export default function QuizzGame({
   incrementScore,
@@ -11,19 +12,16 @@ export default function QuizzGame({
   // const [questions, setQuestions] = useState(newQuestions);
   const [endGame, setEndGame] = useState(false);
   const [checkAnswers, setChceckAnswers] = useState(false);
-  const [points, setScore] = useState(0);
+  // const [points, setScore] = useState(0);
+  const { points } = useContext(PreferencesContext);
 
-  console.log(`QUIZZ QUESTIONS: ${newQuestions}`);
+  // console.log(`QUIZZ QUESTIONS: ${newQuestions}`);
 
-  useEffect(() => {
-    // console.log(points);
-    //Adding points to global score
-    incrementScore(points);
-  }, [points, incrementScore]);
-
-  function handleScore() {
-    setScore((prevScore) => prevScore + 1);
-  }
+  // useEffect(() => {
+  //   // console.log(points);
+  //   //Adding points to global score
+  //   incrementScore(points);
+  // }, [points, incrementScore]);
 
   let questionElements = [];
   questionElements =
@@ -41,7 +39,7 @@ export default function QuizzGame({
               check={checkAnswers}
               answers={answers}
               key={question.question}
-              handleScore={handleScore}
+              // handleScore={handleScore}
             />
           );
         })
@@ -61,7 +59,7 @@ export default function QuizzGame({
       {endGame && (
         <h3
           style={{ color: scoreColor(points, 5) }}
-        >{`The Score is: ${points}/5`}</h3>
+        >{`The Score is: ${points.localPoints}/5`}</h3>
       )}
 
       {endGame === true ? (

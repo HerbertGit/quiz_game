@@ -9,7 +9,8 @@ function App() {
   const [gameScore, setGameScore] = useState(0);
   const [questions, setQuestions] = useState([]);
   const [pending, setPending] = useState(false);
-  const { preferences } = useContext(PreferencesContext);
+  const { preferences, addLocalToGlobalPoints } =
+    useContext(PreferencesContext);
 
   /*
   - Fetch data from API ( 5 questions)
@@ -63,6 +64,10 @@ function App() {
   function toggleGame(toState) {
     apiCall(preferences.category, preferences.difficulty);
     setGameIsRunning(toState);
+
+    if (toState === false) {
+      addLocalToGlobalPoints();
+    }
   }
 
   //Renders QuizzGame component if user starts

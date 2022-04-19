@@ -11,6 +11,10 @@ const ContextProvider = (props) => {
     difficulty: "Any Difficulty",
     category: 0,
   });
+  const [points, setPoints] = useState({
+    localPoints: 0,
+    globalPoints: 0,
+  });
 
   function updatePreferences(type, value) {
     console.log(`type: ${type} value: ${value}`);
@@ -25,11 +29,32 @@ const ContextProvider = (props) => {
     });
   }
 
+  function addLocalPoint() {
+    setPoints((prevPoints) => {
+      return {
+        ...prevPoints,
+        localPoints: prevPoints.localPoints + 1,
+      };
+    });
+  }
+
+  function addLocalToGlobalPoints() {
+    setPoints(({ globalPoints, localPoints }) => {
+      return {
+        globalPoints: globalPoints + localPoints,
+        localPoints: 0,
+      };
+    });
+  }
+
   return (
     <PreferencesContext.Provider
       value={{
         preferences,
         updatePreferences,
+        points,
+        addLocalToGlobalPoints,
+        addLocalPoint,
       }}
     >
       {props.children}

@@ -1,6 +1,7 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import he from "he";
+import { PreferencesContext } from "../utils/Context";
 
 function shuffle(array) {
   if (!array) return;
@@ -32,6 +33,7 @@ export default function Question({
   const [questionAnswers, setAnswers] = useState([]);
   const [checked, setChecked] = useState(false);
   const [reShuffle, toggleReShuffle] = useState(true);
+  const { addLocalPoint } = useContext(PreferencesContext);
 
   let answersList;
   let decodedQuestion = "";
@@ -53,7 +55,6 @@ export default function Question({
   useEffect(() => {
     if (reShuffle) {
       let shuffledAnswers = shuffle(answers);
-
       setAnswers(shuffledAnswers);
       toggleReShuffle(false);
     }
@@ -76,11 +77,12 @@ export default function Question({
     );
   });
 
-  if (check && !checked && selectedAnswer === correct) {
-    console.log(`Question ${text} is correct`);
-    handleScore();
-    setChecked(true);
-  }
+  useEffect(() => {
+    if (check && !checked && selectedAnswer === correct) {
+      addLocalPoint();
+      setChecked(true);
+    }
+  }, [check, checked, addLocalPoint, selectedAnswer, correct]);
 
   // console.log(selectedAnswer);
 
