@@ -55,22 +55,27 @@ export default function QuizzGame({
 
   return (
     <div className="quizz-game">
-      {questionElements}
-      {endGame && (
-        <h3
-          style={{ color: scoreColor(points, 5) }}
-        >{`The Score is: ${points.localPoints}/5`}</h3>
-      )}
-
-      {endGame === true ? (
-        <button className="button quizz-game__button" onClick={backToMainMenu}>
-          Back To Main Menu
-        </button>
-      ) : (
-        <button className="button quizz-game__button" onClick={turnEndGame}>
-          Check Answers
-        </button>
-      )}
+      <div className="quizz-game__questions-container">{questionElements}</div>
+      <div className="quizz-game__info-wrapper">
+        {endGame && (
+          <h3
+            className="quizz-game__points-count"
+            style={{ color: scoreColor(points, 5) }}
+          >{`The Score is: ${points.localPoints}/5`}</h3>
+        )}
+        {endGame === true ? (
+          <button
+            className="button quizz-game__button"
+            onClick={backToMainMenu}
+          >
+            Back To Main Menu
+          </button>
+        ) : (
+          <button className="button quizz-game__button" onClick={turnEndGame}>
+            Check Answers
+          </button>
+        )}
+      </div>
     </div>
   );
 }

@@ -1,3 +1,8 @@
+$big-font-size: clamp(1.2rem, 1vw, 2rem);
+$answers-font-size: clamp(1rem, 0.7vw, 1rem);
+
+$media-breakpoint: 750px;
+
 * {
   box-sizing: border-box;
 }
@@ -18,8 +23,9 @@ p {
 h1 {
   font-size: 2rem;
   font-weight: 700;
-  margin: 0.3em;
+  margin-bottom: 0.3em;
   letter-spacing: 0.1em;
+  text-align: center;
 }
 
 p {
@@ -28,13 +34,28 @@ p {
   /* letter-spacing: 0.1em; */
 }
 
+select {
+  border-radius: 8px;
+  background-color: #f5f7fb;
+  font-size: 1rem;
+  padding: 0.3em;
+  width: 80%;
+  display: block;
+  margin: 0 auto 1em auto;
+}
+
+span {
+  color: #4d5b9e;
+}
+
 .button {
-  padding: 0.5em 1.8em;
+  padding: 0.35em 1.7em;
   font-size: 0.6rem;
   border-radius: 10px;
   border: 1px solid #4d5b9e;
   display: block;
   cursor: pointer;
+  margin: 4em auto 0 auto;
   /* background-color: #d6dbf5; */
 }
 
@@ -54,6 +75,22 @@ section {
   width: 100%;
 }
 
+@media screen and (max-width: $media-breakpoint) {
+  .app {
+    height: auto;
+    width: 100vw;
+    padding: 2em;
+  }
+}
+
+.welcome-screen {
+  display: block;
+  text-align: center;
+  height: 100vh - 10vh;
+  display: flex;
+  align-items: center;
+}
+
 .welcome-screen__text {
   margin-bottom: 2em;
 }
@@ -67,14 +104,30 @@ section {
 }
 
 .quizz-game {
-  width: 40%;
+  width: clamp(700px, 70%, 900px);
   display: flex;
   align-items: center;
   flex-direction: column;
 }
 
 .quizz-game__button {
+  margin: 2em 0;
+  display: inline;
   font-size: 1.3rem;
+}
+
+.quizz-game__info-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: row;
+  width: 100%;
+}
+
+.quizz-game__points-count {
+  /* display: inline; */
+  /* float: left; */
+  /* margin-right: 3em; */
 }
 
 .question {
@@ -84,7 +137,7 @@ section {
 .question__text {
   text-align: left;
   font-weight: 700;
-  font-size: 1.2rem;
+  font-size: $big-font-size;
 }
 
 .question__answer-wrapper {
@@ -98,7 +151,8 @@ section {
 .question__answer {
   border-radius: 8px;
   padding: 0.5em 1.8em;
-  font-size: 1rem;
+  font-size: $answers-font-size;
+  margin: 0;
 }
 
 .question__answer.correct {
@@ -117,4 +171,25 @@ section {
 
 .question__answer.selected {
   background-color: #d6dbf5;
+}
+
+@media screen and (max-width: $media-breakpoint) {
+  .question {
+    margin: 0;
+  }
+  .question__answer-wrapper {
+    flex-direction: column;
+
+    .question__answer {
+      margin-bottom: 1em;
+      width: 100%;
+    }
+  }
+
+  .quizz-game__info-wrapper {
+    flex-direction: column;
+    .quizz-game__button {
+      margin: 1em 0;
+    }
+  }
 }

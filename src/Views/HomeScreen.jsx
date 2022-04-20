@@ -16,16 +16,18 @@ export default function HomeScreen({
   updatePreferences,
   pending,
 }) {
-  const { preferences, points } = useContext(PreferencesContext);
+  const { points } = useContext(PreferencesContext);
 
   // console.log(`preferences@HomeScren : ${preferences[DIFFICULTY]}`);
 
   return (
     <section className="welcome-screen">
       <h1>Quizz App</h1>
-      <h3>{`Your Current Score is ${points.globalPoints}`}</h3>
-      <p className="welcome-screen__text">Some description if needed</p>
-      {`Difficulty: ${preferences[DIFFICULTY]} Category: ${preferences[CATEGORY]}`}
+      <h3>
+        Your Current Score is <span>{points.globalPoints}</span>
+      </h3>
+      {/* <p className="welcome-screen__text">Some description if needed</p> */}
+      {/* {`Difficulty: ${preferences[DIFFICULTY]} Category: ${preferences[CATEGORY]}`} */}
       <PreferencesSelect
         type={CATEGORY}
         updatePreferences={updatePreferences}

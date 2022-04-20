@@ -1,8 +1,9 @@
-import "./App.css";
+import "./App.scss";
 import { useState, useContext } from "react";
 import QuizzGame from "./Views/QuizzGame";
 import HomeScreen from "./Views/HomeScreen";
 import { PreferencesContext } from "./utils/Context";
+// import data from "./data";
 
 function App() {
   const [gameIsRunning, setGameIsRunning] = useState(false);
@@ -30,6 +31,9 @@ function App() {
   */
 
   function apiCall(cat, diff) {
+    // setQuestions(data);
+    // return;
+
     const url = `https://opentdb.com/api.php?amount=5&type=multiple${
       cat === 0 ? "" : `&category=${cat}`
     }${diff === "Any Difficulty" ? "" : `&difficulty=${diff.toLowerCase()}`}`;
@@ -62,7 +66,9 @@ function App() {
 
   //toState tells if game should be disabled (false) or enabled (true)
   function toggleGame(toState) {
-    apiCall(preferences.category, preferences.difficulty);
+    if (toState === true) {
+      apiCall(preferences.category, preferences.difficulty);
+    }
     setGameIsRunning(toState);
 
     if (toState === false) {

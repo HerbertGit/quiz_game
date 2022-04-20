@@ -1,4 +1,4 @@
-export default [
+const data = [
   // {
   //   category: "Geography",
   //   type: "multiple",
@@ -137,3 +137,5 @@ export default [
     incorrect_answers: ["Thor", "Frigg", "Balder"],
   },
 ];
+
+export default data;
